@@ -11,7 +11,7 @@ def clear():
     os.system("cls" if os.name == "nt" else "clear")
 
 
-def oga(name):
+def rps(name):
     game_count = 0
     player_count = 0
     computer_count = 0
@@ -66,7 +66,7 @@ def oga(name):
         while True:
             kp = input(f"\nWill you keep playing, {name}?\n Enter Y for yes\n Enter Q to quit\n")
             if kp.lower() == "y":
-                return oga_pata()
+                return rps_game()
             else:
                 print(f"🎉🎉🎉\nThanks for playing, {name}!")
                 clear()
@@ -84,5 +84,6 @@ if __name__ == "__main__":
                         help="provide name of gamer", required=True)
     args = parser.parse_args()
 
-    oga_pata = oga(args.name)
-    oga_pata()
+    rps_game = rpsargs.name)
+    rps_game()
+

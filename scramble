@@ -1,0 +1,62 @@
+import random
+import sys
+import argparse
+import time
+
+
+def scramble(name="Gamer"):
+    score = 0
+    words = [
+        "lion", "bear", "bird", "frog", "hare", "dog", "raven", "crow", "crab", "swan",
+        "zebra", "otter", "koala", "fish", "cat", "snake", "lemur", "horse", "wolf"]
+    print(f"{name}😊,welcome to the word scramble game!\n\n")
+    sampled = random.sample(words, 6)
+    for picked in random.sample(words, 6):
+        arranged = list(picked)
+
+        while True:
+            random.shuffle(arranged)
+            scrambled = ''.join(arranged)
+            if scrambled != picked:
+                break
+
+        print(f"Unscramble this animal: {scrambled}")
+        attempt = 0
+        while attempt < 3:
+            time.sleep(0.6)
+            entry = input(f"{name},please enter your answer:\n")
+            if entry.isalpha():
+                if entry == picked:
+                    print(f"Great job!{name}")
+                    score += 1
+                    print(f"Your score is {score}/{len(sampled)}\n")
+                    break
+                else:
+                    attempt += 1
+                    if attempt < 3:
+                        print("Close! please try again")
+                    else:
+                        print(f"{name},you have used up your attempts!\n The answer is {picked}\n")
+            else:
+                print("Invalid guess lol")
+    print(f"Game over!!Your final score is {score}/ {len(sampled)}")
+
+    again = input("Would you like to play again?\n")
+    if again in "y":
+        scramble()
+    else:
+        print(f"Thanks for playing, {name}")
+        if __name__ == "__main__":
+            sys.exit(f"Thank you for playing {name}! See you soon")
+        else:
+            return
+
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="a game of solving scrambled animal words")
+    parser.add_argument("-n", "--name", metavar="name", required=True, help="name of gamer")
+    args = parser.parse_args()
+    final = f" are you ready....{args.name}?"
+    print(final)
+
+    scramble(args.name)
